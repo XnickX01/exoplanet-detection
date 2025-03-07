@@ -1,16 +1,20 @@
 #!/bin/bash
 set -e
 
-# Enable pyenv shell integration
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
+# Check if pyenv is installed; if not, prompt the user to install it.
+if ! command -v pyenv >/dev/null 2>&1; then
+  echo "pyenv not found. Please install pyenv from https://github.com/pyenv/pyenv."
+  exit 1
 fi
 
-# Set pyenv shell to Python 3.10.12 so that the correct python is used
+# Enable pyenv shell integration
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
+# Set pyenv shell to Python 3.10.12 so that the correct Python is used
 pyenv shell 3.10.12
 
-# Define which Python version to use. With pyenv set, "python" now points to 3.10.12.
+# Define which Python to use. With pyenv set, "python" now points to 3.10.12.
 PYTHON=python
 
 # Check if the specified Python is installed

@@ -1,9 +1,16 @@
 #!/bin/bash
 set -e
 
+# Determine which pip command to use
+if command -v pip >/dev/null 2>&1; then
+    PIP=pip
+else
+    PIP=pip3
+fi
+
 # Install Python dependencies
 echo "Installing Python dependencies..."
-pip install -r ./backend/requirements.txt
+$PIP install -r ./backend/requirements.txt
 
 # Train the model
 echo "Training model..."
@@ -14,7 +21,7 @@ cd ..
 
 # Start the Python API in the background and disown it
 echo "Starting Python API..."
-pip install --upgrade typing-extensions
+$PIP install --upgrade typing-extensions
 python ./backend/src/api.py & 
 disown
 

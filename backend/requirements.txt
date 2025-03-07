@@ -1,7 +1,6 @@
 boto3
 pandas
 numpy
-tensorflow
 flask
 scikit-image
 astropy

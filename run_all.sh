@@ -9,7 +9,7 @@ pip install -r ./backend/requirements.txt
 echo "Training model..."
 ls ./backend/src
 cd backend
-python -m src.train
+# python -m src.train
 cd ..
 
 # Start the Python API in the background and disown it

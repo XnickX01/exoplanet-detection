@@ -104,3 +104,6 @@ Acknowledgements
 
 Data from NASA’s TESS mission.
 Inspired by research in exoplanet detection and machine learning.
+
+
+./run_all.sh    

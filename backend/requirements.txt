@@ -1,10 +1,10 @@
 boto3
 pandas
 numpy
+https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.8.0-py3-none-any.whl
 flask
 scikit-image
 astropy
 psutil
 fastapi
 uvicorn
-

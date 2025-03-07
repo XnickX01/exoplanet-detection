@@ -8,6 +8,13 @@ else
     PIP=pip3
 fi
 
+# Determine which python command to use
+if command -v python >/dev/null 2>&1; then
+    PYTHON=python
+else
+    PYTHON=python3
+fi
+
 # Install Python dependencies using the --break-system-packages flag for externally managed environments
 echo "Installing Python dependencies..."
 $PIP install --break-system-packages -r ./backend/requirements.txt
@@ -22,7 +29,7 @@ cd ..
 # Start the Python API in the background and disown it
 echo "Starting Python API..."
 $PIP install --break-system-packages --upgrade typing-extensions
-python ./backend/src/api.py & 
+$PYTHON ./backend/src/api.py & 
 disown
 
 # Change to the Angular dashboard directory, install node modules (if needed), then start the dashboard

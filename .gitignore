@@ -1,0 +1,14 @@
+# dont push node modules or requirements at any level
+# dont push node_modules at any level
+# dont push requirements at any level
+# dont push .env at any level
+
+
+# Exclude node_modules folders anywhere in the project
+**/node_modules/
+
+# Exclude any file or folder that contains the text "requirements"
+**/*requirements*
+
+# Exclude all .env files at any level
+**/.env

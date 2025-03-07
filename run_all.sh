@@ -1,32 +1,37 @@
 #!/bin/bash
 set -e
 
-# Check if Homebrew is installed; if not, try to install it.
+# Check if Homebrew is installed; if not, install it
 if ! command -v brew >/dev/null 2>&1; then
-  echo "Homebrew not found. Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  # Add brew to PATH if needed (this may vary by shell/configuration)
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+    echo "Homebrew not found. Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 else
-  echo "Homebrew is installed: $(brew --version)"
+    echo "Homebrew is installed: $(brew --version)"
 fi
 
 # Check if pyenv is installed; if not, install it using Homebrew.
 if ! command -v pyenv >/dev/null 2>&1; then
-  echo "pyenv not found. Installing pyenv via Homebrew..."
-  brew update && brew install pyenv
+    echo "pyenv not found. Installing pyenv via Homebrew..."
+    brew update && brew install pyenv
 else
-  echo "pyenv is installed: $(pyenv --version)"
+    echo "pyenv is installed: $(pyenv --version)"
 fi
 
 # Enable pyenv shell integration
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
-# Set pyenv shell to Python 3.10.12 so that the correct Python is used
+# Check if Python 3.10.12 is installed via pyenv; if not, install it.
+if ! pyenv versions --bare | grep -qx "3.10.12"; then
+  echo "Python 3.10.12 not installed. Installing via pyenv..."
+  pyenv install 3.10.12
+fi
+
+# Set pyenv shell to Python 3.10.12 so that the correct Python is used.
 pyenv shell 3.10.12
 
-# Define which Python to use. With pyenv set, "python" now points to 3.10.12.
+# Define which Python to use. With pyenv set, "python" should now point to 3.10.12.
 PYTHON=python
 
 # Check if the specified Python is installed
@@ -37,7 +42,7 @@ else
     echo "Using $PYTHON: $($PYTHON --version)"
 fi
 
-# Use the chosen Python's pip to install dependencies
+# Use the chosen Python's pip to install dependencies.
 echo "Installing Python dependencies..."
 $PYTHON -m ensurepip --upgrade
 $PYTHON -m pip install -r ./backend/requirements.txt
@@ -46,7 +51,7 @@ $PYTHON -m pip install -r ./backend/requirements.txt
 echo "Training model..."
 ls ./backend/src
 cd backend
-# Uncomment the following line if you want to run training
+# Uncomment the following line if you want to run training:
 # $PYTHON -m src.train
 cd ..
 
@@ -56,7 +61,7 @@ $PYTHON -m pip install --upgrade typing-extensions
 $PYTHON ./backend/src/api.py &
 disown
 
-# Change to the Angular dashboard directory, install node modules (if needed), then start the dashboard
+# Change to the Angular dashboard directory, install node modules if needed, then start the dashboard
 echo "Starting Angular dashboard..."
 cd frontend/dashboard
 npm install

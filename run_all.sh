@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+# Check if pip is installed
+if ! command -v pip >/dev/null 2>&1; then
+    echo "pip not found. Installing pip..."
+    python -m ensurepip --upgrade
+else
+    echo "pip found: $(pip --version)"
+fi
+
 # Install Python dependencies
 echo "Installing Python dependencies..."
 pip install -r ./backend/requirements.txt

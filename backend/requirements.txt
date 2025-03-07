@@ -5,3 +5,4 @@ tensorflow
 flask
 scikit-image
 astropy
+psutil

@@ -1,10 +1,22 @@
 #!/bin/bash
 set -e
 
-# Check if pyenv is installed; if not, prompt the user to install it.
+# Check if Homebrew is installed; if not, try to install it.
+if ! command -v brew >/dev/null 2>&1; then
+  echo "Homebrew not found. Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # Add brew to PATH if needed (this may vary by shell/configuration)
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  echo "Homebrew is installed: $(brew --version)"
+fi
+
+# Check if pyenv is installed; if not, install it using Homebrew.
 if ! command -v pyenv >/dev/null 2>&1; then
-  echo "pyenv not found. Please install pyenv from https://github.com/pyenv/pyenv."
-  exit 1
+  echo "pyenv not found. Installing pyenv via Homebrew..."
+  brew update && brew install pyenv
+else
+  echo "pyenv is installed: $(pyenv --version)"
 fi
 
 # Enable pyenv shell integration

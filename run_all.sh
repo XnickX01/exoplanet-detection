@@ -8,9 +8,9 @@ else
     PIP=pip3
 fi
 
-# Install Python dependencies
+# Install Python dependencies using the --break-system-packages flag for externally managed environments
 echo "Installing Python dependencies..."
-$PIP install -r ./backend/requirements.txt
+$PIP install --break-system-packages -r ./backend/requirements.txt
 
 # Train the model
 echo "Training model..."
@@ -21,7 +21,7 @@ cd ..
 
 # Start the Python API in the background and disown it
 echo "Starting Python API..."
-$PIP install --upgrade typing-extensions
+$PIP install --break-system-packages --upgrade typing-extensions
 python ./backend/src/api.py & 
 disown
 

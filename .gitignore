@@ -8,7 +8,6 @@
 **/node_modules/
 
 # Exclude any file or folder that contains the text "requirements"
-**/*requirements*
 
 # Exclude all .env files at any level
 **/.env

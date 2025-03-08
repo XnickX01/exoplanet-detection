@@ -37,4 +37,4 @@ echo "Starting Angular dashboard..."
 cd frontend_angular/dashboard
 npm install 
 npm install -g @angular/cli
-ng serve
+ng serve --host 0.0.0.0

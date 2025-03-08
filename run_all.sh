@@ -34,6 +34,6 @@ disown
 
 # Change to the Angular dashboard directory, install node modules (if needed), then start the dashboard
 echo "Starting Angular dashboard..."
-cd frontend/dashboard
+cd frontend_angular/dashboard
 npm install 
 ng serve

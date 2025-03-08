@@ -1,0 +1,11 @@
+<div class="dashboard-container">
+    <h2>Exoplanet Detection Dashboard</h2>
+    <input type="file" (change)="onFileSelected($event)" />
+    <button (click)="onUpload()">Upload & Predict</button>
+    <!-- image of the fits file if one is uploaded -->
+     <!-- <div *ngIf="imageUrl">
+        <h3>Uploaded Image:</h3>
+        <img [src]="imageUrl" alt="Uploaded FITS Image" />
+    </div> -->
+    <pre *ngIf="predictions">{{ predictions | json }}</pre>
+  </div>
